@@ -102,8 +102,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 .float{position:fixed;right:20px;bottom:20px;z-index:30;width:58px;height:58px;border-radius:50%;background:var(--main);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(33,55,92,.3);text-decoration:none;animation:pop .5s ease 1s both}
 .float svg{width:28px;height:28px}
 @keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.wheel{transform-origin:260px 318px;animation:spin 6s linear infinite}
+.cup{transform-box:fill-box;transform-origin:50% 100%;animation:throw 3.2s ease-in-out infinite alternate}
+.streaks{animation:slide36 1s linear infinite}
+.marks{animation:slide40 .8s linear infinite}
+@keyframes throw{0%{transform:scale(1.14,.6)}60%{transform:scale(1.02,.96)}100%{transform:scale(1,1)}}
+@keyframes slide36{from{transform:translateX(0)}to{transform:translateX(36px)}}
+@keyframes slide40{from{transform:translateX(0)}to{transform:translateX(40px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
 
 @media(max-width:860px){.menu{display:none}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stats div:nth-child(3){border-left:0;padding-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}
@@ -154,16 +158,23 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
         <g transform="translate(184 92)"><ellipse cx="0" cy="-14" rx="24" ry="14" fill="url(#glaze)"/><ellipse cx="0" cy="-26" rx="16" ry="4" fill="#8FA8D4"/></g>
         <ellipse cx="260" cy="372" rx="170" ry="26" fill="#000" opacity=".1"/>
         <path d="M150 330 L370 330 L350 372 L170 372 Z" fill="url(#base)"/>
-        <g class="wheel">
-          <ellipse cx="260" cy="318" rx="130" ry="26" fill="#B7BBC7"/>
-          <ellipse cx="260" cy="314" rx="122" ry="22" fill="#D3D6DE"/>
-          <path d="M150 314 Q260 296 370 314" stroke="#ECEEF2" stroke-width="3" fill="none"/>
+        <clipPath id="wheelclip"><ellipse cx="260" cy="314" rx="122" ry="22"/></clipPath>
+        <clipPath id="cupclip"><path d="M206 312 Q196 250 214 200 L306 200 Q324 250 314 312 Q260 326 206 312 Z"/></clipPath>
+        <ellipse cx="260" cy="318" rx="130" ry="26" fill="#B7BBC7"/>
+        <ellipse cx="260" cy="314" rx="122" ry="22" fill="#D3D6DE"/>
+        <g clip-path="url(#wheelclip)"><g class="marks" fill="#F1F2F5">
+          <rect x="100" y="292" width="8" height="44"/><rect x="140" y="292" width="8" height="44"/><rect x="180" y="292" width="8" height="44"/><rect x="220" y="292" width="8" height="44"/><rect x="260" y="292" width="8" height="44"/><rect x="300" y="292" width="8" height="44"/><rect x="340" y="292" width="8" height="44"/><rect x="380" y="292" width="8" height="44"/>
+        </g></g>
+        <g class="cup">
+          <path d="M206 312 Q196 250 214 200 L306 200 Q324 250 314 312 Q260 326 206 312 Z" fill="url(#clay)"/>
+          <g clip-path="url(#cupclip)"><g class="streaks" fill="#F0BC9E" opacity=".35">
+            <rect x="160" y="190" width="10" height="140"/><rect x="196" y="190" width="10" height="140"/><rect x="232" y="190" width="10" height="140"/><rect x="268" y="190" width="10" height="140"/><rect x="304" y="190" width="10" height="140"/><rect x="340" y="190" width="10" height="140"/>
+          </g></g>
+          <path d="M222 236 Q260 246 298 236" stroke="#E8AE8E" stroke-width="2" fill="none" opacity=".7"/>
+          <path d="M216 270 Q260 282 304 270" stroke="#E8AE8E" stroke-width="2" fill="none" opacity=".7"/>
+          <ellipse cx="260" cy="200" rx="46" ry="11" fill="#8E4F33"/>
+          <ellipse cx="260" cy="200" rx="34" ry="7" fill="#6E3B26"/>
         </g>
-        <path d="M206 312 Q196 250 214 200 L306 200 Q324 250 314 312 Q260 326 206 312 Z" fill="url(#clay)"/>
-        <ellipse cx="260" cy="200" rx="46" ry="11" fill="#8E4F33"/>
-        <ellipse cx="260" cy="200" rx="34" ry="7" fill="#6E3B26"/>
-        <path d="M222 236 Q260 246 298 236" stroke="#E8AE8E" stroke-width="2" fill="none" opacity=".7"/>
-        <path d="M216 270 Q260 282 304 270" stroke="#E8AE8E" stroke-width="2" fill="none" opacity=".7"/>
         <g transform="translate(420 344)"><ellipse cx="0" cy="18" rx="44" ry="9" fill="#000" opacity=".1"/><path d="M-36 -40 Q-40 0 -26 16 L26 16 Q40 0 36 -40 Z" fill="url(#glaze)"/><ellipse cx="0" cy="-40" rx="36" ry="9" fill="#8FA8D4"/><path d="M36 -26 Q58 -20 52 -2 Q48 8 34 6" stroke="#2E4A7A" stroke-width="7" fill="none" stroke-linecap="round"/></g>
         <circle cx="440" cy="110" r="44" fill="#D99372" opacity=".25"/>
       </svg>
